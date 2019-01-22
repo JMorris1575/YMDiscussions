@@ -1,0 +1,29 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme">
+            <h3>Unit {{ activity.index }}: {{ activity }}</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ activity.overview }}</h5>
+            <hr>
+            <h5 class="card-title">Available Sections:</h5>
+            <hr>
+            <ul class="card-text">
+                {% for section in sections %}
+                    <a href="{% url 'activity:section' activity.index section.index %}">
+                        <li class="row h4 py-3 mx-auto">
+                            Section {{ section.index }} - {{ section.title }}
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+            <hr>
+            <div class="row justify-content-center">
+                <a class="btn btn-light" href="{% url 'activity:welcome' %}">Back to Activity List</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

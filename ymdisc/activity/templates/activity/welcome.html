@@ -1,0 +1,30 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme text-center">
+            <h3>Topic List</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Click on a topic below to add comments about that section of the book.</h5>
+            <hr>
+            <div class="row">
+                <div class="col-md-7">
+                    <ul class="card-text">
+                        {% for activity in activities %}
+                            <a href="{% url 'activity:summary' activity.index %}">
+                                <li class="row h4 py-3">
+                                    Unit {{ activity.index }}: {{ activity.title }}
+                                </li>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-fluid" src="{% static image %}">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+header, footer {
+  color: Beige;
+  background: #0080b0; }
+
+header a {
+  color: Beige !important;
+  opacity: 0.9;
+  text-decoration: none; }
+
+header a:hover {
+  color: Beige;
+  opacity: 1.0;
+  text-decoration: none; }
+
+header img {
+  vertical-align: top;
+  opacity: 0.9; }
+
+header img:hover {
+  opacity: 1.0; }
+
+header .nav-link {
+  padding-top: 0; }
+
+.banner {
+  font-family: 'Permanent Marker', cursive;
+  color: Beige; }
+
+.main-color-scheme {
+  color: Beige !important;
+  background: #0080b0; }
+
+.reverse-color-scheme {
+  color: #0080b0;
+  background: Beige; }
+
+.navbar-toggler {
+  border: none; }
+
+.navbar-toggler:focus {
+  outline: none; }
+
+.navbar-toggler-icon {
+  color: Beige; }
+
+.text-comment {
+  color: Navy; }
+
+.text-main {
+  color: #0080b0; }

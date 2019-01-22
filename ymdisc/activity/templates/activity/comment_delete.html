@@ -1,0 +1,32 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme text-center">
+            <h4>Confirm Deletion</h4>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">
+                Do you really want to delete the highlighted comment?
+            </h4>
+            <ul>
+                {% for comment in item.get_comments %}
+                    {% if comment == delete_comment %}
+                        <li class="text-warning h5">{{ comment.user.first_name }}: {{ comment.text }}</li>
+                    {% else %}
+                        <li class="text-comment">{{ comment.user.first_name }}: {{ comment.text }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <form action="{% url 'activity:comment_delete' activity.index delete_comment.pk %}" method="post">
+                {% csrf_token %}
+                <div class="row justify-content-between">
+                    <button class="btn-light btn-lg text-center" type="submit">Yes, Delete it</button>
+                    <a class="btn btn-light btn-lg text-center"
+                       href="{% url 'activity:comment_edit' activity.index delete_comment.pk %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="card col-md-8 mx-md-auto my-3 p-0">
+        <div class="card-header text-center main-color-scheme">
+            <h3>Thanks for visiting the Saint Basil Teen RCIA Website!</h3>
+        </div>
+        <div class="card-body mx-auto">
+            <div class="card-title">
+                <h5 class="card-title reverse-color-scheme text-center">Click the button below to log back in.</h5>
+            </div>
+            <div class="row card-text">
+                <a href="{% url 'user:login' %}" type="button" class="btn main-color-scheme mx-auto my-3">
+                    Log Back In.
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme text-center">
+            <h4>Edit or Delete this Discussion Point to "{{ activity }} - {{ section.title }}"</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="text-main">{{ item.text }}</h5>
+            <ul>
+                {% for comment in item.get_comments %}
+                    <li class="text-comment">{{ comment.user.first_name }}: {{ comment.text }}</li>
+                {% endfor %}
+            </ul>
+            {% if error %}
+                <p class="text-danger h5">{{ error }}</p>
+            {% endif %}
+            <form action="{% url 'activity:item_edit' activity.index item.pk %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="item">Edit your entry below:</label>
+                    <textarea class="form-control" id="item"
+                              name="item_text" rows="3" autofocus>{{ item.text }}</textarea>
+                </div>
+                <div class="row justify-content-between">
+                    <button class="btn-light btn-lg text-center" type="submit">Save Changes</button>
+                    <a class="btn btn-light btn-lg text-center"
+                       href="{% url 'activity:section' activity.index item.section.index %}">Cancel</a>
+                    <a class="btn btn-light btn-lg text-center"
+                       href="{% url 'activity:item_delete' activity.index item.pk %}">Delete...</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

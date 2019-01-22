@@ -1,0 +1,27 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme text-center">
+            <h4>Add Discussion Point to "{{ activity }} - {{ section.title }}"</h4>
+        </div>
+        <div class="card-body">
+            {% for item in items %}
+                <h5>{{ item.text }}</h5>
+            {% endfor %}
+            <form action="{% url 'activity:item_create' activity.index section.index %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="item">Enter a new discussion point below:</label>
+                    <textarea class="form-control" id="item" name="item_text" rows="3" autofocus></textarea>
+                </div>
+                <div class="row justify-content-around">
+                    <button class="btn-light btn-lg text-center" type="submit">Submit</button>
+                    <a class="btn btn-light text-center"
+                       href="{% url 'activity:section' activity.index section.index %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

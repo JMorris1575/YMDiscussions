@@ -1,0 +1,61 @@
+{% load static %}
+
+{% block header %}
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <!-- St. Basil Icon Logo -->
+                <div class="col-md-1 d-none d-md-inline">
+                    <a href="{% url 'activity:welcome' %}" class="brand">
+                        <img src="{% static 'images/StBasilIcon.png' %}" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col">
+                    <!-- Banner Heading -->
+                    <div class="row">
+                        <div class="col">
+                            <a href="{% url 'activity:welcome' %}">
+                                <h1 class="banner d-inline">Saint Basil Youth Ministry Discussion</h1>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Welcome and Login/Logout Links -->
+                    <div class="row align-items-top">
+                        <div class="col-6">
+                            {% if user.is_authenticated %}
+                                <span class="h5">Welcome {{ user.first_name }}!</span>
+                                <a class="link" href="{% url 'user:logout' %}">  (Logout)</a>
+                            {% else %}
+                                <span class="h5">Welcome!</span>
+                                <a class="link" href="{% url 'user:login' %}?next={{ request.path_info }}">  (Login)</a>
+                            {% endif %}
+                        </div>
+                        <!-- Menu Links -->
+                        <div class="col">
+                            <nav class="navbar navbar-light navbar-expand-lg pt-0">
+                                <button class="navbar-toggler ml-auto p-0 pb-3" type="button"
+                                        data-toggle="collapse" data-target="#navbarCollapse">
+                                    <span class="navbar-toggler-icon pt-1" style="background:none">
+                                        <i class="fas fa-bars"></i>
+                                    </span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarCollapse">
+                                    <div class="navbar-nav ml-auto nav-fill">
+                                        {% if user.is_staff %}
+                                            <a href="{% url 'mail:send-mail' %}"
+                                               class="nav-item nav-link text-right pb-3">
+                                                E-mail
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}

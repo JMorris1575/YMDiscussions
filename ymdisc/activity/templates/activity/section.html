@@ -1,0 +1,47 @@
+{% extends parent_template|default:"base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="card mt-3">
+        <div class="card-header reverse-color-scheme text-center">
+            <h3>{{ activity }} - {{ section.title }}</h3>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ section.instructions }}</h5>
+            {% if section.link_name %}
+                <a class="card-title text-main h5" href="{{ section.link }}">Click Here: {{ section.link_name }}</a>
+            {% endif %}
+            <hr>
+            <ul>
+                {% for item in items %}
+                    {% if item.author == user %}
+                        <li class="h5 text-main">
+                            {{ item.text }}
+                            <a href="{% url 'activity:item_edit' activity.index item.pk %}"> (Edit...)</a>
+                        </li>
+                    {% else %}
+                        <li class="h5 text-main">{{ item.text }}</li>
+                    {% endif %}
+                    {% for comment in item.get_comments %}
+                        {% if comment.user == user %}
+                            <p class="text-comment">{{ comment.user.first_name }}: {{ comment.text }}
+                                <a class="text-primary"
+                                   href="{% url 'activity:comment_edit' activity.index comment.pk %}"> (Edit...)</a>
+                            </p>
+                        {% else %}
+                            <p class="text-comment">{{ comment.user.first_name }}: {{ comment.text }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <a class="btn btn-light mb-3" href="{% url 'activity:comment_create' activity.index item.pk %}">
+                        Make Entry
+                    </a>
+                {% endfor %}
+            </ul>
+            {% if user.is_staff %}
+                <a class="btn btn-light" href="{% url 'activity:item_create' activity.index section.index %}">
+                    Add New Discussion Point
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
