@@ -35,13 +35,18 @@
                     <a class="btn btn-light mb-3" href="{% url 'activity:comment_create' activity.index item.pk %}">
                         Make Entry
                     </a>
+                    <hr>
                 {% endfor %}
             </ul>
             {% if user.is_staff %}
                 <a class="btn btn-light" href="{% url 'activity:item_create' activity.index section.index %}">
                     Add New Discussion Point
                 </a>
+                <hr>
             {% endif %}
+            <div class="row justify-content-center">
+                <a class="btn btn-light" href="{% url 'activity:summary' activity.index %}">Back to Section List</a>
+            </div>
         </div>
     </div>
 {% endblock %}
