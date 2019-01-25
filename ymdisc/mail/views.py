@@ -47,15 +47,12 @@ class SendMail(View):
             subject_template = request.POST['subject']
             message_template = request.POST['message']
             for recipient in recipients:
+                print('recipient = ', recipient)
                 member = User.objects.get(username=recipient)
-                monitor = User.objects.get(username='Larry')
-                if utilities.is_minor(member):
-                    email_list = [member.email, monitor.email]
-                else:
-                    email_list = [member.email]
+                email_list = [member.email]
                 subject, message = convert_tags(subject_template, message_template, member)
                 send_mail(subject, message,
-                          'FrJim@youthRCIA.jmorris.webfactional.com',
+                          'FrJim@ymdisc.jmorris.webfactional.com',
                           email_list, fail_silently=False)
 
         return redirect('activity:welcome')
