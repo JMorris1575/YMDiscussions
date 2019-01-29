@@ -44,8 +44,9 @@
                 </a>
                 <hr>
             {% endif %}
-            <div class="row justify-content-center">
-                <a class="btn btn-light" href="{% url 'activity:summary' activity.index %}">Back to Section List</a>
+            <div class="row justify-content-around">
+                <a class="btn btn-light" href="{% url 'activity:welcome' %}">Topic List</a>
+                <a class="btn btn-light" href="{% url 'activity:summary' activity.index %}">Section List</a>
             </div>
         </div>
     </div>
