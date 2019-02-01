@@ -9,7 +9,7 @@
         <div class="card-body">
             <h5>{{ item.text }}</h5>
             {% for comment in comments %}
-                <p class="comment-text">{{ user.first_name }} says: {{ comment.text }}</p>
+                <p class="comment-text">{{ comment.user.first_name }} says: {{ comment.text }}</p>
             {% endfor %}
             <form action="{% url 'activity:comment_create' activity.index item.pk %}" method="post">
                 {% csrf_token %}
